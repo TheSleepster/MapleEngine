@@ -1,0 +1,32 @@
+[
+{
+  "directory": "C:/Users/jal4dsox/C++Stuff/Maple/bin",
+  "command": "C:\\PROGRA~1\\LLVM\\bin\\CLANG_~1.EXE  @CMakeFiles/Maple.dir/includes_CXX.rsp -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -o CMakeFiles\\Maple.dir\\Main.cpp.obj -c C:\\Users\\jal4dsox\\C++Stuff\\Maple\\src\\Main.cpp",
+  "file": "C:/Users/jal4dsox/C++Stuff/Maple/src/Main.cpp",
+  "output": "CMakeFiles/Maple.dir/Main.cpp.obj"
+},
+{
+  "directory": "C:/Users/jal4dsox/C++Stuff/Maple/bin",
+  "command": "C:\\PROGRA~1\\LLVM\\bin\\CLANG_~1.EXE  @CMakeFiles/Maple.dir/includes_CXX.rsp -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -o CMakeFiles\\Maple.dir\\engineManager.cpp.obj -c C:\\Users\\jal4dsox\\C++Stuff\\Maple\\src\\engineManager.cpp",
+  "file": "C:/Users/jal4dsox/C++Stuff/Maple/src/engineManager.cpp",
+  "output": "CMakeFiles/Maple.dir/engineManager.cpp.obj"
+},
+{
+  "directory": "C:/Users/jal4dsox/C++Stuff/Maple/bin",
+  "command": "C:\\PROGRA~1\\LLVM\\bin\\CLANG_~1.EXE  @CMakeFiles/Maple.dir/includes_CXX.rsp -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -o CMakeFiles\\Maple.dir\\inputHandling.cpp.obj -c C:\\Users\\jal4dsox\\C++Stuff\\Maple\\src\\inputHandling.cpp",
+  "file": "C:/Users/jal4dsox/C++Stuff/Maple/src/inputHandling.cpp",
+  "output": "CMakeFiles/Maple.dir/inputHandling.cpp.obj"
+},
+{
+  "directory": "C:/Users/jal4dsox/C++Stuff/Maple/bin",
+  "command": "C:\\PROGRA~1\\LLVM\\bin\\CLANG_~1.EXE  @CMakeFiles/Maple.dir/includes_CXX.rsp -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -o CMakeFiles\\Maple.dir\\renderer.cpp.obj -c C:\\Users\\jal4dsox\\C++Stuff\\Maple\\src\\renderer.cpp",
+  "file": "C:/Users/jal4dsox/C++Stuff/Maple/src/renderer.cpp",
+  "output": "CMakeFiles/Maple.dir/renderer.cpp.obj"
+},
+{
+  "directory": "C:/Users/jal4dsox/C++Stuff/Maple/bin",
+  "command": "C:\\PROGRA~1\\LLVM\\bin\\clang.exe  @CMakeFiles/Maple.dir/includes_C.rsp -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -o CMakeFiles\\Maple.dir\\C_\\Users\\jal4dsox\\C++Stuff\\Maple\\include\\glad\\src\\glad.c.obj -c C:\\Users\\jal4dsox\\C++Stuff\\Maple\\include\\glad\\src\\glad.c",
+  "file": "C:/Users/jal4dsox/C++Stuff/Maple/include/glad/src/glad.c",
+  "output": "CMakeFiles/Maple.dir/C_/Users/jal4dsox/C++Stuff/Maple/include/glad/src/glad.c.obj"
+}
+]
