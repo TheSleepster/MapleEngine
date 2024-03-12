@@ -36,32 +36,15 @@ namespace Maple {
         };
     };
 
-    // NOTE: This is really ugly, it's the simplest solution though. If it's 
-    // stupid but it works, it isn't stupid.
-
-    struct Entity {
-        const char* sprite;
-        v2 postion, velocity;
-        v2 gravity;
-
-        int currenthealth;
-        int maxHealth;
-        bool isdead;
-    };
-
-    struct player {
-        
-    };
-
     // NOTE: ECS 
-/*  
-    struct tagData {
-        enum entityType {
-            player,
-            enemy,
-        };
+    enum EntityFlags {
+        ACTIVE,
+        CHARACTER,
+        PLAYER_CONTROLLED,
+        AI_CONTROLLED,
+        RENDERABLE
     };
-    
+
     struct transform {
         int entity_id;
         v2 position;
@@ -88,12 +71,11 @@ namespace Maple {
     };
 
     struct componentList {
-        tagData tag;
 
-        sprite spriteComponents[100];
-        transform transformComponents[100];
-        health healthComponents[100];
-        gravity gravityComponents[100];
+        sprite spriteComponents[1000];
+        transform transformComponents[1000];
+        health healthComponents[1000];
+        gravity gravityComponents[1000];
 
         int totalSpriteComponents;
         int totalTransformComponents;
@@ -103,7 +85,10 @@ namespace Maple {
     };
 
     struct player {
-
+        EntityFlags inputFlag = PLAYER_CONTROLLED;
+        EntityFlags activeFlag = ACTIVE;
+        
+        componentList *componentList;
     };
 
     struct enemy {
@@ -113,6 +98,4 @@ namespace Maple {
     struct goomba : public enemy {
 
     };
-*/
-    
 }

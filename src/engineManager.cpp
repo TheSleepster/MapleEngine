@@ -19,6 +19,7 @@ namespace Maple {
 
     void update(Maple::game::windowData *appWindow) {
         handleRendering(appWindow);
+
     }
 }
 

@@ -116,18 +116,22 @@ namespace Maple {
     }
 
     inline v2 normalize() {
-
+        v2 result;
+        return result;
     }
 
     inline v2 lerp() {
-        
+        v2 result;
+        return result;
     }
 
     inline v2 slerp() {
-
+        v2 result;
+        return result;
     }
 
     inline v2 clamp() {
-
+        v2 result;
+        return result;
     }
 }

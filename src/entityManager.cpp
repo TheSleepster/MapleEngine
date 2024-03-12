@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef define
 
 #include "Precompiled.hpp"
@@ -24,29 +22,27 @@ typedef double real32;
 #endif
 
 namespace Maple {
+    void createEntity(componentList components) {
+        local_persist int id = 0;
+        id = EntityCount++;
 
-}
 
-// TODO: Check on this System's approach and see if it's the best solution
+        components.transformComponents[id].entity_id = id;
+        components.totalTransformComponents++;
 
-/*
-    void createEntity(componentList *components) {
-        int id = EntityCount++;
+        components.spriteComponents[id].entity_id = id;
+        components.totalSpriteComponents++;
 
-        components->transformComponents[id].entity_id = id;
-        components->totalTransformComponents++;
+        components.healthComponents[id].entity_id = id;
+        components.totalHealthComponents++;
 
-        components->spriteComponents[id].entity_id = id;
-        components->totalSpriteComponents++;
+        components.gravityComponents[id].entity_id = id;
+        components.totalGravityComponents++;
 
-        components->healthComponents[id].entity_id = id;
-        components->totalHealthComponents++;
-
-        components->gravityComponents[id].entity_id = id;
-        components->totalGravityComponents++;
+        printf("An entity has been created!\n Index is: %i\n", id);
     } 
 
-    void updateTransformSystem(transform *transform, componentList *components) {
+    void updateTransformComponents(transform *transform, componentList *components) {
 
         if(transform->position.y <= 0) {
             health *health;
@@ -71,5 +67,5 @@ namespace Maple {
 
         componentList entityarray[EntityCount];
     }
-*/
 
+}

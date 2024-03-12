@@ -74,6 +74,14 @@ int Maple_main(int argc, char *argv[]) {
         NULL, 
         NULL);
 
+    Maple::componentList components;
+
+
+    for(int i = 0; i <= 999; i++) {
+        Maple::createEntity(components);
+        Maple::createEntity(components);
+    }
+
     // NOTE: GAMELOOP
 
     while(!wData.closeRequest) {
@@ -85,6 +93,22 @@ int Maple_main(int argc, char *argv[]) {
                 case SDL_EVENT_QUIT:
                     wData.closeRequest = true;
             }
+        }
+
+        for(int i = 0; i < components.totalTransformComponents; i++) {
+            Maple::updateTransformComponents(&components.transformComponents[i], &components);
+        }
+
+        for(int i = 0; i < components.totalSpriteComponents; i++) {
+            Maple::updateSpriteComponents(&components.spriteComponents[i], &components);
+        }
+
+        for(int i = 0; i < components.totalHealthComponents; i++) {
+            Maple::updateHealthComponents(&components.healthComponents[i], &components);
+        }
+
+        for (int i = 0; i < components.totalGravityComponents; i++) {
+            //functionality later
         }
 
         const u8 *keystate = SDL_GetKeyboardState(NULL);

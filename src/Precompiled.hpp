@@ -54,10 +54,10 @@ namespace Maple {
     void renderPlayer(Maple::game::windowData *appWindow);
     void renderEnemy(Maple::game::windowData *appWindow);
 
-    void createEntity(componentList *components);
-    void updateTransformSystem(transform *transform, componentList *components);
-    void updateSpriteComponents(sprite *sprite, componentList *components);
-    void updateHealthComponents(health *health, componentList *components); 
-    void killEntity(componentList *components, int index); 
+    void createEntity(Maple::componentList components);
+    void updateTransformComponents(Maple::transform *transform, Maple::componentList *components);
+    void updateSpriteComponents(Maple::sprite *sprite, Maple::componentList *components);
+    void updateHealthComponents(Maple::health *health, Maple::componentList *components); 
+    void killEntity(Maple::componentList *components, int index); 
 }
 
