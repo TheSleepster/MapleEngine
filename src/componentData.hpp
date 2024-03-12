@@ -81,7 +81,6 @@ namespace Maple {
         int totalTransformComponents;
         int totalHealthComponents;
         int totalGravityComponents;
-        
     };
 
     struct player {
