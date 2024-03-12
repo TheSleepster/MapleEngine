@@ -38,6 +38,7 @@ typedef double real32;
 global Maple::v2 v2;
 
 global Maple::game::windowData wData;
+
 global int EntityCount = 0;
 
 #endif
@@ -47,17 +48,8 @@ global int EntityCount = 0;
 namespace Maple {
     void awake();
     void update(Maple::game::windowData *appWindow);
-
     void handleWindowInput();
 
-    void handleRendering(Maple::game::windowData *appWindow);
-    void renderPlayer(Maple::game::windowData *appWindow);
-    void renderEnemy(Maple::game::windowData *appWindow);
-
-    void createEntity(Maple::componentList components);
-    void updateTransformComponents(Maple::transform *transform, Maple::componentList *components);
-    void updateSpriteComponents(Maple::sprite *sprite, Maple::componentList *components);
-    void updateHealthComponents(Maple::health *health, Maple::componentList *components); 
-    void killEntity(Maple::componentList *components, int index); 
+    SDL_Texture *generateTexture(SDL_Surface *tempSurface, const char* filepath);
 }
 
