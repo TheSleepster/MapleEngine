@@ -5,7 +5,6 @@
 #ifndef define
 
 #include "Precompiled.hpp"
-#include "componentData.hpp"
 
 #define Maple_main main 
 #define WINDOW_WIDTH 1280
@@ -25,54 +24,13 @@ typedef double f16;
 
 #endif
 
-// NOTE: Establishes the window and it's necessary components
-
 int Maple_main(int argc, char *argv[]) {
-
     const int fps = 60;
     const int frameDelay = 1000 / fps;
     local_persist u32 startTime = SDL_GetTicks();
     int deltaTime = SDL_GetTicks() - startTime;
-
- //   Maple::awake();
-
-// NOTE: Initialize SDL 
-
-    SDL_Init(SDL_INIT_VIDEO);
-    assert(!SDL_Init(SDL_INIT_VIDEO));
     
-    SDL_Init(SDL_INIT_AUDIO);
-    assert(!SDL_Init(SDL_INIT_AUDIO));
-
-    SDL_Init(SDL_INIT_CAMERA);
-    assert(!SDL_Init(SDL_INIT_CAMERA));
-
-    wData.window = NULL;
-    wData.renderer = NULL;
-    wData.texture = NULL;
-
-    // TODO: Assess whether OpenGL is the right option for this
-
-    wData.window = 
-        SDL_CreateWindow (
-        "Maple", 
-        WINDOW_WIDTH, 
-        WINDOW_HEIGHT, 
-        SDL_WINDOW_OPENGL);
-
-    wData.renderer = 
-        SDL_CreateRenderer (
-        wData.window, 
-        NULL, 
-        SDL_RENDERER_ACCELERATED);
-
-    wData.texture = 
-        SDL_CreateTexture (
-        wData.renderer, 
-        SDL_PIXELFORMAT_RGBA8888, 
-        SDL_TEXTUREACCESS_STREAMING, 
-        NULL, 
-        NULL);
+    renderAwake(&wData);
 
     // NOTE: GAMELOOP
 
@@ -94,9 +52,8 @@ int Maple_main(int argc, char *argv[]) {
 
         SDL_SetRenderDrawColor(wData.renderer, 0, 0, 0, 255);
         SDL_RenderClear(wData.renderer);
-   
-//        Maple::update(&wData);
-        
+        //update
+
         SDL_RenderPresent(wData.renderer);
         
         deltaTime = SDL_GetTicks() - startTime;
@@ -105,5 +62,13 @@ int Maple_main(int argc, char *argv[]) {
             SDL_Delay(frameDelay - deltaTime);
         } 
     }
+    
+    SDL_DestroyWindow(wData.window);
+    SDL_DestroyRenderer(wData.renderer);
+    SDL_DestroyTexture(wData.texture);
+    SDL_GL_DeleteContext(wData.OpenGLContext);
+
+    SDL_Quit();
+
     return 0;
 }

@@ -4,8 +4,8 @@
 
 #include <cstddef>
 #include <cstdint>
-#include <glad/glad.h>
 #include <cassert>
+#include <glad/glad.h>
 #include <SDL.h>
 #include <struct.h>
 #include <memory>
@@ -15,8 +15,9 @@
 #include <math.h>
 #include <cmath>
 #include <SDL3_image/SDL_image.h>
-
-#include "componentData.hpp"
+#include <flecs.h>
+#include <cglm.h>
+#include <struct.h>
 
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720 
@@ -34,22 +35,21 @@ typedef float real16;
 typedef double real32;
 
 // NOTE: These are globals used throughout the entire project
+struct game {
+    struct windowData {
+        SDL_Window *window;
+        SDL_Renderer *renderer;
+        SDL_Texture *texture;
 
-global Maple::v2 v2;
+        SDL_GLContext OpenGLContext;
+        
+        bool closeRequest;
+    };
+};
 
-global Maple::game::windowData wData;
-
-global int EntityCount = 0;
+global game::windowData wData;
 
 #endif
 
 // NOTE: Function declarations go here
-
-namespace Maple {
-    void awake();
-    void update(Maple::game::windowData *appWindow);
-    void handleWindowInput();
-
-    SDL_Texture *generateTexture(SDL_Surface *tempSurface, const char* filepath);
-}
-
+void renderAwake(game::windowData *wData);
