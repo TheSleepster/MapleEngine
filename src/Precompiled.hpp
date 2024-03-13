@@ -38,8 +38,6 @@ typedef double real32;
 struct game {
     struct windowData {
         SDL_Window *window;
-        SDL_Renderer *renderer;
-        SDL_Texture *texture;
 
         SDL_GLContext OpenGLContext;
         

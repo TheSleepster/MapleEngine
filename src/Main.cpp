@@ -1,7 +1,6 @@
 /*
     Maple is a primarily 2D game engine being developed by yours truly made in C/C++
 */
-
 #ifndef define
 
 #include "Precompiled.hpp"
@@ -35,6 +34,8 @@ int Maple_main(int argc, char *argv[]) {
     // NOTE: GAMELOOP
 
     while(!wData.closeRequest) {
+        glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+
         startTime = SDL_GetTicks();
 
         SDL_Event evnt;
@@ -50,12 +51,10 @@ int Maple_main(int argc, char *argv[]) {
             wData.closeRequest = true;
         } 
 
-        SDL_SetRenderDrawColor(wData.renderer, 0, 0, 0, 255);
-        SDL_RenderClear(wData.renderer);
-        //update
+        glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+        glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+        SDL_GL_SwapWindow(wData.window);
 
-        SDL_RenderPresent(wData.renderer);
-        
         deltaTime = SDL_GetTicks() - startTime;
 
         if(deltaTime < frameDelay) {
@@ -64,8 +63,6 @@ int Maple_main(int argc, char *argv[]) {
     }
     
     SDL_DestroyWindow(wData.window);
-    SDL_DestroyRenderer(wData.renderer);
-    SDL_DestroyTexture(wData.texture);
     SDL_GL_DeleteContext(wData.OpenGLContext);
 
     SDL_Quit();

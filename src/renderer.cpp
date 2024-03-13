@@ -7,8 +7,6 @@ void renderAwake(game::windowData *wData) {
     SDL_Init(SDL_INIT_VIDEO);
     
     wData->window = NULL;
-    wData->renderer = NULL;
-    wData->texture = NULL;
 
 // NOTE: Configures OpenGL
     setAttributes();
@@ -19,20 +17,6 @@ void renderAwake(game::windowData *wData) {
         WINDOW_WIDTH, 
         WINDOW_HEIGHT, 
         SDL_WINDOW_OPENGL);
-
-    wData->renderer = 
-        SDL_CreateRenderer (
-        wData->window, 
-        NULL, 
-        SDL_RENDERER_ACCELERATED);
-
-    wData->texture = 
-        SDL_CreateTexture (
-        wData->renderer, 
-        SDL_PIXELFORMAT_RGBA8888, 
-        SDL_TEXTUREACCESS_STREAMING, 
-        NULL, 
-        NULL);
 
     wData->OpenGLContext = SDL_GL_CreateContext(wData->window);
 
