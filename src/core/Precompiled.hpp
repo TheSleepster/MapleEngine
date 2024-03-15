@@ -6,7 +6,7 @@
 #include <cstdint>
 #include <cassert>
 #include <glad/glad.h>
-#include <glfw3.h>
+#include <SDL.h>
 #include <struct.h>
 #include <memory>
 #include <time.h>
@@ -14,11 +14,10 @@
 #include <cstdlib>
 #include <math.h>
 #include <cmath>
+#include <SDL3_image/SDL_image.h>
 #include <flecs.h>
 #include <cglm.h>
 #include <struct.h>
-
-#define Maple_main main
 
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720 
@@ -36,11 +35,23 @@ typedef float real16;
 typedef double real32;
 
 // NOTE: These are globals used throughout the entire project
-struct MapleEngine {
-    GLFWwindow *window;
-    real32 lastTime;
+struct game {
+    struct windowData {
+        SDL_Window *window;
+
+        SDL_GLContext OpenGLContext;
+        
+        bool closeRequest;
+    };
 };
 
+global game::windowData wData;
 
 #endif
+
 // NOTE: Function declarations go here
+void MapleCreateWindow();
+void handleEvents();
+void handleInput();
+void preDraw();
+void Draw();
