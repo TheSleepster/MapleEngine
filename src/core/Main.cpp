@@ -1,7 +1,6 @@
 /*
     Maple is a primarily 2D game engine being developed by yours truly made in C/C++
 */
-#include <glad/glad.h>
 #ifndef define
 
 #include "Precompiled.hpp"
@@ -48,12 +47,12 @@ void handleInput() {
     } 
 }
 
-unsigned int VAO;
-unsigned int VBO;
-unsigned int shaderProgram;
+global unsigned int VAO;
+global unsigned int VBO;
+global unsigned int shaderProgram;
 
-char infoLog[512];
-int success;
+global char infoLog[512];
+global int success;
 
 void MapleCreateWindow() {
     wData.closeRequest = false;
@@ -97,29 +96,46 @@ void GetOpenGLVersionInfo() {
     printf("Vendor: %s\n", glGetString(GL_VENDOR));
     printf("Version: %s\n", glGetString(GL_VERSION));
     printf("Renderer: %s\n", glGetString(GL_RENDERER));
-    printf("Shading Language: %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
+    printf("Shading Language: %s\n\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
 }
 
 void handleOpenGLPipeline() {
-    const char* vertexShaderSource = R"(
-            #version 460 core
-            layout (location = 0) in vec3 aPos;
-        layout (location = 1) in vec3 aColor;
-        out vec3 vertexColor;
-        void main() {
-            gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
-            vertexColor = aColor;
-        })";
-    const char* fragmentShaderSource = R"(
-    #version 460 core
-    in vec3 vertexColor;
-    out vec4 FragColor;
-    void main() {
-        FragColor = vec4(vertexColor, 1.0);
-    }
-)";
+    const char* relativeVertexFilePath = "../src/.shader/vertexShader.glsl";
+    const char* relativeFragmentFilePath = "../src/.shader/fragmentShader.glsl";
 
+    const char* vertexShaderSource = getShaderFromFile(relativeVertexFilePath);
+    const char* fragmentShaderSource = getShaderFromFile(relativeFragmentFilePath);
     shaderProgram = createShaderProgram(vertexShaderSource, fragmentShaderSource);
+}
+
+const char *getShaderFromFile(const char *filepath) {
+    FILE* file;
+    long size;
+    char* shaderSource;
+
+    fopen_s(&file, filepath, "rb");
+    if (file == NULL) {
+        printf("Failed to open file: %s\n", filepath);
+        return 0;
+    }
+
+    fseek(file, 0L, SEEK_END);
+    size = ftell(file);
+    fseek(file, 0L, SEEK_SET);
+
+    shaderSource = (char*)malloc(size + 1);
+    if (shaderSource == NULL) {
+        printf("Failed to allocate memory for shader source\n");
+        fclose(file);
+        return NULL;
+    }
+
+    fread(shaderSource, 1, size, file);
+    shaderSource[size] = '\0';
+
+    fclose(file);
+
+    return(shaderSource);
 }
 
 unsigned int 
@@ -137,6 +153,7 @@ createShaderProgram(const char *vertexShaderSource, const char *fragmentShaderSo
     if(!success) {
         glGetProgramInfoLog(programObject, 512, NULL, infoLog);
         printf("Failed to link with the programObject!\n");
+        printf("Info log: %s", infoLog);
     }
 
     glDeleteShader(vertexShader);
@@ -208,8 +225,12 @@ void VertexSpecification() {
 
 void Draw() {
     glClear(GL_COLOR_BUFFER_BIT); // Clear the color buffer
-    glClearColor(0.0f, 0.3f, 1.0f, 0.1f);
+    glClearColor(0.0f, 0.0f, 0.0f, 0.1f);
+ 
     glUseProgram(shaderProgram); // Use the shader program
     glBindVertexArray(VAO); // Bind the VAO
+                            
     glDrawArrays(GL_TRIANGLES, 0, 3); // Draw the triangle
+
+    glUseProgram(0);
 }

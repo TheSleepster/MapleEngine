@@ -2,16 +2,20 @@
 
 #ifndef define
 
+#include <stdio.h>
+#include <cstdlib>
+#include <cstring>
 #include <cstddef>
+#include <string>
 #include <cstdint>
 #include <cassert>
+#include <string>
+#include <fstream>
 #include <glad/glad.h>
 #include <SDL.h>
 #include <struct.h>
 #include <memory>
 #include <time.h>
-#include <cstddef>
-#include <cstdlib>
 #include <math.h>
 #include <cmath>
 #include <SDL3_image/SDL_image.h>
@@ -50,6 +54,7 @@ global game::windowData wData;
 #endif
 
 // NOTE: Function declarations go here
+const char *getShaderFromFile(const char *filepath);
 void MapleCreateWindow();
 void handleEvents();
 void handleInput();
