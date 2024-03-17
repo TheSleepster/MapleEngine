@@ -7,21 +7,17 @@
 #include <cstring>
 #include <cstddef>
 #include <string>
-#include <cstdint>
-#include <cassert>
-#include <string>
-#include <fstream>
-#include <glad/glad.h>
-#include <SDL.h>
-#include <struct.h>
 #include <memory>
 #include <time.h>
 #include <math.h>
 #include <cmath>
-#include <SDL3_image/SDL_image.h>
+#include <cassert>
+#include <string>
+#include <fstream>
+#include <cstdint>
+#include <glad/glad.h>
 #include <flecs.h>
-#include <cglm.h>
-#include <struct.h>
+#include <SDL.h>
 
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720 

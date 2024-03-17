@@ -11,6 +11,8 @@
 #endif
 
 int Maple_main(int argc, char *argv[]) {
+    GLenum error;
+
     MapleCreateWindow();
     GetOpenGLVersionInfo();
     glViewport(0, 0, 1280, 720);
@@ -25,6 +27,11 @@ int Maple_main(int argc, char *argv[]) {
         Draw();
 
         SDL_GL_SwapWindow(wData.window);
+
+        if(error != 0) {
+            printf("Error: %i\n", error);
+            error = 0;
+        }
     }
     return 0;
 }
@@ -49,7 +56,9 @@ void handleInput() {
 
 global unsigned int VAO;
 global unsigned int VBO;
+global unsigned int IBO;
 global unsigned int shaderProgram;
+global char* shaderSource;
 
 global char infoLog[512];
 global int success;
@@ -105,13 +114,14 @@ void handleOpenGLPipeline() {
 
     const char* vertexShaderSource = getShaderFromFile(relativeVertexFilePath);
     const char* fragmentShaderSource = getShaderFromFile(relativeFragmentFilePath);
+
     shaderProgram = createShaderProgram(vertexShaderSource, fragmentShaderSource);
+    free((void *)shaderSource);
 }
 
 const char *getShaderFromFile(const char *filepath) {
     FILE* file;
     long size;
-    char* shaderSource;
 
     fopen_s(&file, filepath, "rb");
     if (file == NULL) {
@@ -189,14 +199,25 @@ CompileShader(unsigned int type, const char *source)
 
 void VertexSpecification() {
 // NOTE: Vertices are stored.
-    
     float vertices[] = {
         -0.5f, -0.5f, 0.0f, // Vertex 1 position
          1.0f,  0.0f, 0.0f, // Vertex 1 color (red)
          0.5f, -0.5f, 0.0f, // Vertex 2 position
          0.0f,  1.0f, 0.0f, // Vertex 2 color (green)
-         0.0f,  0.5f, 0.0f, // Vertex 3 position
-         0.0f,  0.0f, 1.0f  // Vertex 3 color (blue)
+         0.5f,  0.5f, 0.0f, // Vertex 3 position
+         0.0f,  0.0f, 1.0f,  // Vertex 3 color (blue)
+        
+         0.5f,  0.5f, 0.0f, // Vertex 4 position
+         0.0f,  0.0f, 1.0f, // Vertex 4 color (red)
+        -0.5f,  0.5f, 0.0f, // Vertex 5 position
+         0.0f,  1.0f, 0.0f, // Vertex 5 color (green)
+        -0.5f, -0.5f, 0.0f, // Vertex 6 position
+         1.0f,  0.0f, 0.0f  // Vertex 6 color (blue)
+    };
+
+    unsigned int indices[] {
+        0, 1, 2,
+        2, 1, 0,
     };
 
 // NOTE: This Generates a Vertex Array Object (VAO) for our use.
@@ -210,6 +231,13 @@ void VertexSpecification() {
 
 // NOTE: Populates the VBO with data
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+
+// WARNING: INDEX BUFFER
+    glGenBuffers(1, &IBO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
+
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 // NOTE: Tells OpenGL what attributes are active (Check the docs)
     glEnableVertexAttribArray(0);
@@ -229,8 +257,9 @@ void Draw() {
  
     glUseProgram(shaderProgram); // Use the shader program
     glBindVertexArray(VAO); // Bind the VAO
-                            
-    glDrawArrays(GL_TRIANGLES, 0, 3); // Draw the triangle
+
+    //glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+    glDrawArrays(GL_TRIANGLES, 0, 6); // Draw the triangle
 
     glUseProgram(0);
 }
